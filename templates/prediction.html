@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<title>Fake News Detection</title>
+
+<style>
+body { background-color: #f8f8f8; font-family: 'Poppins', sans-serif; margin: 0; }
+.header-gradient { background-image: linear-gradient(135deg, #10b981 0%, #06b6d4 100%); }
+.card-form { display: flex; justify-content: center; align-items: center; min-height: 50vh; }
+.check-news-btn { background-color: #059669; }
+.check-news-btn:hover { background-color: #047857; }
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="header-gradient text-white py-6">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <header class="flex justify-between items-center mb-6">
+      <span class="text-2xl font-serif font-extrabold">Fake News Detection</span>
+      <nav>
+        <a href="/" class="text-white hover:text-gray-200 mr-4 font-medium">Home</a>
+        <a href="/prediction" class="text-white hover:text-gray-200 font-medium">Prediction</a>
+      </nav>
+    </header>
+
+    <div class="text-center py-2">
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-2">Detect Fake News Instantly</h1>
+      <p class="text-lg sm:text-xl font-light mb-4 mx-auto max-w-2xl text-gray-200">
+        Paste any news article below and find out if it's real or fake using <b>Machine Learning</b>.
+      </p>
+      <a href="#verification-section" class="inline-block check-news-link py-2 px-6 rounded-lg font-bold shadow-md transition duration-300">
+        Submit News
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Centered Form -->
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 card-form">
+  <div id="verification-section" class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-3xl">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Enter News to Verify</h2>
+
+    <form action="/prediction" method="POST" class="space-y-4">
+      <div>
+        <label for="news" class="sr-only">News Text</label>
+        <textarea
+          class="w-full p-4 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 text-gray-700 placeholder-gray-500"
+          id="news" name="news" rows="6"
+          placeholder="Paste your news text here..." required></textarea>
+      </div>
+
+      <button type="submit"
+        class="check-news-btn text-white w-full py-3 rounded-lg font-bold text-lg shadow-md hover:shadow-lg transition duration-300">
+        Check News
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Dialog -->
+<div id="resultModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+  <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 text-center">
+    <h3 id="modalTitle" class="text-2xl font-bold mb-4"></h3>
+    <p id="modalMessage" class="text-gray-700 mb-4"></p>
+    <button onclick="closeModal()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg font-semibold">
+      Close
+    </button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-gray-600 body-font mt-8">
+  <div class="container mx-auto py-3 px-5">
+    <p class="text-gray-500 text-sm text-center">
+      © 2025 Fake News Detection — Built with ❤️ using Flask & ML
+    </p>
+  </div>
+</footer>
+
+<script>
+function showModal(title, message, isFake) {
+    const modal = document.getElementById('resultModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+
+    modalTitle.innerText = title;
+    modalMessage.innerText = message;
+
+    if(isFake) {
+        modalTitle.classList.remove('text-green-500');
+        modalTitle.classList.add('text-red-500');
+    } else {
+        modalTitle.classList.remove('text-red-500');
+        modalTitle.classList.add('text-green-500');
+    }
+
+    modal.classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('resultModal').classList.add('hidden');
+}
+
+{% if prediction_text %}
+    let prediction = "{{ prediction_text }}";
+    let message = `This news article is likely ${prediction.toUpperCase()}.`;
+    if(prediction === "Real News"){
+        showModal("✅ Real News", message, false);
+    } else if(prediction === "Fake News") {
+        showModal("❌ Fake News", message, true);
+    } else {
+        showModal("ℹ️ Info", message, false);
+    }
+{% endif %}
+</script>
+
+</body>
+</html>

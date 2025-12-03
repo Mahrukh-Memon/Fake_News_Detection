@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Fake News Detection</title>
+
+    <style>
+      body {
+        background-color: #f8f8f8;
+        font-family: 'Poppins', sans-serif;
+      }
+      .header-gradient {
+        background-image: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      }
+      .hero-button {
+        background-color: #059669;
+      }
+      .hero-button:hover {
+        background-color: #047857;
+      }
+      .accent-text {
+        color: #059669;
+      }
+      .linkedin-links a {
+        margin-right: 1rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Top LinkedIn Links -->
+    <div class="bg-gray-100 py-2 text-center linkedin-links">
+      <span>Connect with us:</span>
+      <a href="https://www.linkedin.com/in/shahid-ali-471b65311"
+         target="_blank" class="accent-text hover:underline">Shahid Ali</a>
+      <a>and</a>
+
+      <a href="https://www.linkedin.com/in/mahrukh-memon-b32b9a314/"
+         target="_blank" class="accent-text hover:underline">Mahrukh Memon</a>
+    </div>
+
+    <!-- Header -->
+    <div class="header-gradient">
+      <header class="body-font pt-6 pb-6">
+        <div class="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
+          <a class="flex title-font font-medium items-center text-white mb-3 md:mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                 class="w-10 h-10 text-white p-2 bg-green-500 rounded-full" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="ml-3 text-2xl font-serif font-extrabold">Fake News Detection</span>
+          </a>
+
+          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+            <a href="/" class="mr-4 hover:text-gray-100">Home</a>
+            <a href="/prediction" class="mr-4 hover:text-gray-100">Prediction</a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Hero Section (Height Fixed) -->
+      <section class="body-font text-white">
+        <div class="container mx-auto flex px-5 py-20 md:flex-row flex-col items-center">
+
+          <div class="lg:flex-grow md:w-1/2 lg:pr-16 md:pr-10 flex flex-col
+                      md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+
+            <h1 class="title-font sm:text-4xl text-5xl mb-6 font-bold">
+              Fake News Detection
+              <br class="hidden lg:inline-block">Using Machine Learning
+            </h1>
+
+            <p class="mb-8 leading-relaxed text-gray-100 text-lg">
+              Identify whether news articles are real or fake using intelligent text analysis and machine learning algorithms.
+            </p>
+
+            <div class="flex justify-center">
+              <a href="/prediction">
+                <button class="inline-flex text-white hero-button border-0 py-3 px-8
+                               focus:outline-none rounded text-lg font-semibold shadow-lg
+                               hover:shadow-xl transition duration-300">
+                  Try Prediction
+                </button>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img src="{{ url_for('static', filename='news_paper.jpeg') }}"
+                 alt="Fake News Detection Illustration"
+                 class="rounded-lg shadow-xl w-full h-auto">
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-gray-600 body-font mt-0">
+      <div class="bg-gray-100">
+        <div class="container mx-auto py-8 px-5 flex flex-wrap flex-col sm:flex-row">
+
+          <p class="text-gray-600 text-sm text-center sm:text-left">
+            © 2025 Fake News Detection — <span class="accent-text">All Rights Reserved</span>
+          </p>
+
+          <span class="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-sm">
+            Built with ❤️ using Flask & ML
+          </span>
+
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
